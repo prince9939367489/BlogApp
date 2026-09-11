@@ -288,6 +288,9 @@ node_modules/
 # Visual Studio 6 build log
 *.plg
 
+# Local ASP.NET Core data-protection keys
+**/.data-protection/
+
 # Visual Studio 6 workspace options file
 *.opt
 
