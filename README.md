@@ -15,6 +15,10 @@ The project renders a complete editorial-style interface with:
 
 > The articles are demonstration content. Post storage, create/edit workflows, authentication, comments, and search are not implemented yet.
 
+**Live demo:** [Open Fieldnotes](https://prince-fieldnotes-blog.princekumar120207.chatgpt.site)
+
+The public URL serves a static export of the same three portfolio pages so visitors can view the output without installing .NET. The MVC source remains the canonical implementation.
+
 ## Technology
 
 - ASP.NET Core MVC
@@ -60,4 +64,4 @@ This is a polished, learning-focused MVC foundation and static content showcase.
 - Add user authentication and authorization
 - Add categories, comments, search, and pagination
 - Add automated tests
-- Publish a live demo on a .NET-capable host
+- Add a persistent post model and publishing workflow before moving beyond the static showcase
