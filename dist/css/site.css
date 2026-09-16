@@ -94,3 +94,53 @@ h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; font-weight: 500; l
 }
 
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* Reading and discovery */
+[hidden] { display: none !important; }
+:where(input, select, button):focus-visible { outline: 3px solid var(--coral); outline-offset: 4px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+.site-header nav a[aria-current="page"] { color: var(--ink); text-decoration: underline; text-underline-offset: .45rem; text-decoration-color: #6b803e; }
+.hero h1 { max-width: 12ch; font-size: clamp(3.3rem, 7vw, 6.4rem); }
+.hero-intro p { margin-top: 0; }
+.text-link { font-size: .9rem; font-weight: 750; text-underline-offset: .3rem; }
+.featured h2 a, .post-card h3 a { text-decoration: none; }
+.featured h2 a:hover, .post-card h3 a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .15em; }
+.featured .read-label { color: var(--lime); }
+.read-label { text-underline-offset: .3rem; }
+.story-filters { display: flex; flex-wrap: wrap; gap: 1rem; align-items: end; padding: 1.5rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); }
+.story-filters label { display: block; margin-bottom: .4rem; font-size: .8rem; font-weight: 750; }
+.search-field { flex: 1 1 18rem; }
+.story-filters input, .story-filters select { width: 100%; min-height: 3rem; padding: .65rem .8rem; border: 1px solid #8d968e; border-radius: .4rem; background: var(--card); color: var(--ink); font: inherit; }
+.story-filters button { min-height: 3rem; padding: .65rem 1.2rem; border: 1px solid var(--ink); border-radius: .4rem; background: var(--ink); color: white; font: inherit; font-weight: 650; cursor: pointer; }
+.story-filters button:hover { background: #354b3d; }
+.reset-link { padding: .65rem .25rem; font-size: .9rem; text-underline-offset: .25rem; }
+.result-count { margin: 1.4rem 0; color: var(--muted); font-size: .85rem; }
+.post-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+.post-card { min-height: 24rem; padding: clamp(1.5rem, 3vw, 2.5rem); }
+.post-card:nth-child(2) { background: #e8eddb; }
+.post-card:nth-child(3) { background: #ece7dd; }
+.post-index { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; }
+.post-index span { border: 1px solid #a3ad9f; border-radius: 2rem; padding: .25rem .7rem; font: 650 .75rem system-ui, sans-serif; }
+.post-card h3 { max-width: 24ch; }
+.post-card .read-label { padding-top: 1rem; }
+.collection-note { margin: 2.5rem 0 0; color: var(--muted); font-size: .85rem; text-align: center; }
+.empty-state { padding: 3rem 1.5rem; text-align: center; border: 1px dashed #8d968e; border-radius: var(--radius); }
+.empty-state h3 { font-size: 2rem; }
+.reading-page { width: min(100% - 2.5rem, 50rem); margin: 4rem auto 6rem; }
+.article-header { padding: 3rem 0 2rem; border-bottom: 1px solid var(--line); }
+.article-header h1 { margin: 0 0 1.5rem; font-size: clamp(2.7rem, 6vw, 4.8rem); line-height: 1.08; overflow-wrap: break-word; }
+.article-summary { color: var(--muted); font-size: 1.2rem; }
+.article-byline { margin-top: 2rem; font-size: .85rem; color: var(--muted); }
+.article-body { max-width: 42rem; margin: 3rem auto; }
+.article-body h2 { margin: 2.5rem 0 1rem; font-size: 2rem; line-height: 1.2; }
+.article-body p { font-size: 1.125rem; line-height: 1.85; }
+.reading-next { padding: 2rem; margin-top: 4rem; border-radius: var(--radius); background: #e8eddb; }
+.reading-next h2 { font-size: 2rem; line-height: 1.2; }
+.reading-next a { display: block; padding: 1rem 0; border-top: 1px solid #c2cbb7; font-weight: 650; text-underline-offset: .25rem; }
+@media (max-width: 52rem) { .post-grid { grid-template-columns: 1fr; } }
+@media (max-width: 36rem) {
+  .story-filters > div { flex: 1 1 100%; }
+  .story-filters button { flex: 1; }
+  .reading-page { margin-top: 2rem; }
+  .reading-next { padding: 1.3rem; }
+}

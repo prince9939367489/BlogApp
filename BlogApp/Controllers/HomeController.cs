@@ -13,9 +13,18 @@ namespace BlogApp.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string? q, string? category)
         {
-            return View();
+            ViewData["Query"] = (q ?? "").Trim();
+            ViewData["Category"] = category ?? "";
+            return View(PostCatalog.All);
+        }
+
+        [HttpGet("/stories/{slug}")]
+        public IActionResult Article(string slug)
+        {
+            var post = PostCatalog.All.FirstOrDefault(p => p.Slug == slug);
+            return post is null ? NotFound() : View(post);
         }
 
         public IActionResult Privacy()

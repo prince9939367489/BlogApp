@@ -1,34 +1,22 @@
-# BlogApp — Fieldnotes
+# Fieldnotes — BlogApp
 
-Fieldnotes is a responsive ASP.NET Core MVC blog showcase built to demonstrate controller routing, Razor views, shared layouts, custom CSS, static assets, and production error handling.
+A responsive reading website built with **ASP.NET Core MVC and .NET 10**. Browse four original sample essays about software, design, and learning, then open a focused reading page.
 
-## Application output
+[Live website](https://prince-fieldnotes-blog.princekumar120207.chatgpt.site)
 
-The project renders a complete editorial-style interface with:
+## What works
 
-- A featured story and three static sample article cards
-- Responsive desktop and mobile layouts
-- A project About page
-- A truthful privacy page for the current no-data-collection scope
-- Shared navigation and footer through a Razor layout
-- Keyboard-visible focus states and reduced-motion support
+- Four complete sample articles with stable URLs, reading-time estimates, and related-story links.
+- Search across titles, summaries, and topics, combined with a category filter.
+- Live filtering, shareable search URLs, result counts, reset controls, and an empty state.
+- Server-rendered search when JavaScript is disabled in the MVC app.
+- Responsive layouts, semantic headings, labeled controls, keyboard focus, and reduced-motion support.
+- About and Privacy pages, article descriptions, and a real HTTP 404 for unknown article slugs.
+- A static export generated from the rendered MVC pages, keeping both versions consistent.
 
-> The articles are demonstration content. Post storage, create/edit workflows, authentication, comments, and search are not implemented yet.
-
-**Live demo:** [Open Fieldnotes](https://prince-fieldnotes-blog.princekumar120207.chatgpt.site)
-
-The public URL serves a static export of the same three portfolio pages so visitors can view the output without installing .NET. The MVC source remains the canonical implementation.
-
-## Technology
-
-- ASP.NET Core MVC
-- .NET 10 and C#
-- Razor views and Tag Helpers
-- Custom responsive CSS
+Articles are demonstration content stored in a typed C# catalog. Database persistence, author accounts, editing, and comments are not implemented. The static website requires JavaScript for filtering; reading and navigation work without it.
 
 ## Run locally
-
-### Prerequisite
 
 Install the .NET 10 SDK.
 
@@ -36,32 +24,49 @@ Install the .NET 10 SDK.
 git clone https://github.com/prince9939367489/BlogApp.git
 cd BlogApp
 dotnet restore
-dotnet run --project BlogApp/BlogApp.csproj
+dotnet run --project BlogApp/BlogApp.csproj --urls http://localhost:5249
 ```
 
-Open the local URL printed by .NET. The development profiles currently use:
+Open [localhost:5249](http://localhost:5249). Try searching for "quiet", filtering by Development, opening a story, and using the site on a narrow screen.
 
-- `https://localhost:7161`
-- `http://localhost:5249`
+## Validate
 
-## Project structure
+```bash
+dotnet build BlogApp.sln --configuration Release
+```
 
-- `BlogApp/Controllers` — MVC request handlers
-- `BlogApp/Models` — view models
-- `BlogApp/Views/Home` — Stories, About, and Privacy pages
-- `BlogApp/Views/Shared` — shared layout and error page
-- `BlogApp/wwwroot` — the project stylesheet and static assets
-- `BlogApp/Program.cs` — services, middleware, and conventional routing
+With the app running, use Node.js 22 or newer for the dependency-free HTTP checks:
 
-## Current scope
+```bash
+node scripts/smoke-test.mjs http://localhost:5249
+```
 
-This is a polished, learning-focused MVC foundation and static content showcase. It intentionally avoids claiming database-backed blog functionality that has not been implemented.
+The checks cover all articles, unknown routes, combined search/category filters, whitespace, escaped input, supporting pages, and static assets. GitHub Actions builds the application and runs these checks.
 
-## Roadmap
+## Regenerate the static website
 
-- Add post create, read, update, and delete workflows
-- Add database persistence with Entity Framework Core
-- Add user authentication and authorization
-- Add categories, comments, search, and pagination
-- Add automated tests
-- Add a persistent post model and publishing workflow before moving beyond the static showcase
+With the MVC app running:
+
+```bash
+node scripts/export-static.mjs http://localhost:5249
+```
+
+This renders the home, About, Privacy, and article pages into `dist/`, rewrites internal links to static HTML paths, and copies the CSS, JavaScript, and favicon. Serve `dist/` at a website root. The public showcase is a separately hosted static version; a GitHub commit alone does not redeploy it.
+
+## Project map
+
+| Location | Purpose |
+| --- | --- |
+| `BlogApp/Models/BlogPost.cs` | Typed article catalog and reading-time calculation |
+| `BlogApp/Controllers/HomeController.cs` | Search inputs, page routes, article lookup and 404s |
+| `BlogApp/Views/Home` | Story collection, reading pages, About, Privacy |
+| `BlogApp/Views/Shared/_Layout.cshtml` | Navigation, metadata, shared footer |
+| `BlogApp/wwwroot` | Responsive styles and progressive search enhancement |
+| `scripts` | HTTP smoke checks and static export |
+| `dist` | Generated static website |
+
+## Next steps
+
+- Add persistent storage and an authenticated authoring workflow.
+- Add pagination when the collection grows.
+- Introduce comments only with appropriate moderation and privacy controls.

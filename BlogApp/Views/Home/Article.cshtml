@@ -1,0 +1,28 @@
+@model BlogApp.Models.BlogPost
+@{
+    ViewData["Title"] = Model.Title;
+    ViewData["Description"] = Model.Summary;
+    var related = BlogApp.Models.PostCatalog.All.Where(p => p.Slug != Model.Slug).Take(2);
+}
+<article class="reading-page">
+    <a class="text-link" href="@Url.Action("Index", "Home")#latest-title">← All stories</a>
+    <header class="article-header">
+        <p class="eyebrow">@Model.Category · @Model.ReadingMinutes min read</p>
+        <h1>@Model.Title</h1>
+        <p class="article-summary">@Model.Summary</p>
+        <p class="article-byline">Fieldnotes editorial · Sample essay</p>
+    </header>
+    <div class="article-body">
+        @foreach (var part in Model.Sections)
+        {
+            <section><h2>@part.Heading</h2><p>@part.Body</p></section>
+        }
+    </div>
+    <aside class="reading-next" aria-labelledby="next-title">
+        <p class="eyebrow">Keep exploring</p><h2 id="next-title">One idea leads to another.</h2>
+        @foreach (var post in related)
+        {
+            <a href="@Url.Action("Article", "Home", new { slug = post.Slug })">@post.Title <span aria-hidden="true">↗</span></a>
+        }
+    </aside>
+</article>

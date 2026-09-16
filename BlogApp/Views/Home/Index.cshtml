@@ -1,54 +1,55 @@
+@model IReadOnlyList<BlogApp.Models.BlogPost>
 @{
     ViewData["Title"] = "Stories";
+    var query = ViewData["Query"] as string ?? "";
+    var category = ViewData["Category"] as string ?? "";
+    var featured = Model[0];
+    bool Matches(BlogApp.Models.BlogPost post) =>
+        (string.IsNullOrEmpty(category) || post.Category.Equals(category, StringComparison.OrdinalIgnoreCase)) &&
+        (post.Title + " " + post.Summary + " " + post.Category).Contains(query, StringComparison.OrdinalIgnoreCase);
+    var count = Model.Count(Matches);
 }
-
 <section class="hero">
-    <div>
-        <p class="eyebrow">Ideas on making and learning</p>
-        <h1>Notes from the work in progress.</h1>
-    </div>
-    <p class="hero-intro">A quiet collection of sample essays about building useful software, designing with care, and learning by shipping.</p>
+    <div><p class="eyebrow">A journal for curious builders</p><h1>Good ideas.<br />Thoughtfully made.</h1></div>
+    <div class="hero-intro"><p>Notes on building useful software, designing with care, and learning one small release at a time.</p><a class="text-link" href="#latest-title">Explore the journal <span aria-hidden="true">↓</span></a></div>
 </section>
-
 <section class="featured" aria-labelledby="featured-title">
     <div class="featured-copy">
-        <p class="post-meta"><span>Featured</span> · 6 min read</p>
-        <h2 id="featured-title">Build the smallest version that can teach you something</h2>
-        <p>Good side projects begin with one useful question. A compact first release makes the answer visible, creates momentum, and gives every later feature a reason to exist.</p>
-        <span class="read-label">Sample article <span aria-hidden="true">↗</span></span>
+        <p class="post-meta"><span>Editor's pick</span> · @featured.ReadingMinutes min read</p>
+        <h2 id="featured-title"><a href="@Url.Action("Article", "Home", new { slug = featured.Slug })">@featured.Title</a></h2>
+        <p>@featured.Summary</p>
+        <a class="read-label" href="@Url.Action("Article", "Home", new { slug = featured.Slug })">Read the story <span aria-hidden="true">↗</span></a>
     </div>
-    <div class="featured-art" role="img" aria-label="Abstract paper layers representing an idea taking shape">
-        <span></span><span></span><span></span>
-    </div>
+    <div class="featured-art" role="img" aria-label="Abstract paper layers representing an idea taking shape"><span></span><span></span><span></span></div>
 </section>
-
 <section class="latest" aria-labelledby="latest-title">
-    <div class="section-heading">
-        <p class="eyebrow">Latest notes</p>
-        <h2 id="latest-title">Three ideas worth keeping</h2>
-    </div>
+    <div class="section-heading"><p class="eyebrow">The collection / 01–04</p><h2 id="latest-title">Find your next idea.</h2></div>
+    <form class="story-filters" method="get" action="@Url.Action("Index", "Home")" role="search">
+        <div class="search-field"><label for="story-search">Search stories</label><input id="story-search" name="q" type="search" value="@query" placeholder="Try design, software, learning…" /></div>
+        <div><label for="story-category">Topic</label><select id="story-category" name="category">
+            <option value="">All topics</option>
+            @foreach (var topic in Model.Select(p => p.Category).Distinct().Order())
+            {
+                <option value="@topic" selected="@(category.Equals(topic, StringComparison.OrdinalIgnoreCase))">@topic</option>
+            }
+        </select></div>
+        <button type="submit">Find stories <span aria-hidden="true">↗</span></button>
+        <a class="reset-link" href="@Url.Action("Index", "Home")#latest-title">Reset</a>
+    </form>
+    <p id="result-count" class="result-count" role="status" aria-live="polite">@count @(count == 1 ? "story" : "stories") found</p>
     <div class="post-grid">
-        <article class="post-card">
-            <p class="post-index">01</p>
-            <p class="post-meta">Design · 4 min read</p>
-            <h3>Designing for quiet focus</h3>
-            <p>Clarity often comes from deciding what the page can leave out—not what else it can hold.</p>
-            <span class="read-label">Sample article</span>
-        </article>
-        <article class="post-card post-card--accent">
-            <p class="post-index">02</p>
-            <p class="post-meta">Development · 5 min read</p>
-            <h3>The useful discipline of clear boundaries</h3>
-            <p>Small components, explicit routes, and honest project scope make software easier to explain and extend.</p>
-            <span class="read-label">Sample article</span>
-        </article>
-        <article class="post-card">
-            <p class="post-index">03</p>
-            <p class="post-meta">Learning · 3 min read</p>
-            <h3>What changes after you ship</h3>
-            <p>A finished first version replaces guesses with feedback and turns a private exercise into a public record of growth.</p>
-            <span class="read-label">Sample article</span>
-        </article>
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            var post = Model[i];
+            <article class="post-card" data-category="@post.Category" data-search="@(post.Title + " " + post.Summary + " " + post.Category)" hidden="@(!Matches(post))">
+                <p class="post-index">@((i + 1).ToString("00")) <span>@post.Category</span></p>
+                <p class="post-meta">Sample essay · @post.ReadingMinutes min read</p>
+                <h3><a href="@Url.Action("Article", "Home", new { slug = post.Slug })">@post.Title</a></h3>
+                <p>@post.Summary</p>
+                <a class="read-label" href="@Url.Action("Article", "Home", new { slug = post.Slug })">Read story <span aria-hidden="true">↗</span><span class="sr-only">: @post.Title</span></a>
+            </article>
+        }
     </div>
-    <p class="scope-note"><strong>Portfolio note:</strong> these entries are static demonstration content. Post storage, editing, authentication, and comments are not implemented yet.</p>
+    <div class="empty-state" hidden="@(count != 0)"><h3>No stories found</h3><p>Try a shorter search or choose a different topic.</p><a class="reset-link" href="@Url.Action("Index", "Home")#latest-title">Show all stories</a></div>
+    <p class="collection-note">Four sample essays. A little space to read, reflect, and make something useful.</p>
 </section>

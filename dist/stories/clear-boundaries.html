@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Small components, explicit routes, and honest project scope make software easier to explain and extend." />
+    <meta name="theme-color" content="#17231d" />
+    <title>The useful discipline of clear boundaries — Fieldnotes</title>
+    <link rel="stylesheet" href="/css/site.css" />
+</head>
+<body>
+    <a class="skip-link" href="#content">Skip to content</a>
+    <header class="site-header">
+        <a class="brand" aria-label="Fieldnotes home" href="/">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            <span>Fieldnotes</span>
+        </a>
+        <nav aria-label="Primary navigation">
+            <a href="/">Stories</a>
+            <a href="/about.html">About</a>
+            <a href="/privacy.html">Privacy</a>
+        </nav>
+    </header>
+
+    <main id="content">
+        <article class="reading-page">
+    <a class="text-link" href="/#latest-title">← All stories</a>
+    <header class="article-header">
+        <p class="eyebrow">Development · 1 min read</p>
+        <h1>The useful discipline of clear boundaries</h1>
+        <p class="article-summary">Small components, explicit routes, and honest project scope make software easier to explain and extend.</p>
+        <p class="article-byline">Fieldnotes editorial · Sample essay</p>
+    </header>
+    <div class="article-body">
+            <section><h2>Separate content from presentation</h2><p>When article text lives inside a page layout, even a small content change can disturb the design. A simple content model gives titles, summaries, categories, and sections a clear home. Views can then concentrate on how those details are presented.</p></section>
+            <section><h2>Make routes a promise</h2><p>A link should lead to a stable destination. Give each article a readable slug and handle unknown slugs with a real not-found response. Readers can bookmark a story, share its address, and return without depending on the state of a previous screen.</p></section>
+            <section><h2>Keep the first abstraction small</h2><p>You do not need a complex service layer for four sample articles. Start with a catalog that describes the current needs clearly. Introduce storage and editing when the project needs them, while keeping the boundary between content and rendering intact.</p></section>
+            <section><h2>Document what exists</h2><p>A project is easier to evaluate when its documentation distinguishes working behavior from future plans. Explain how to run it, what to try, and what is still missing. Honest scope helps the next contributor make a useful change.</p></section>
+    </div>
+    <aside class="reading-next" aria-labelledby="next-title">
+        <p class="eyebrow">Keep exploring</p><h2 id="next-title">One idea leads to another.</h2>
+            <a href="/stories/start-small.html">Build the smallest version that can teach you something <span aria-hidden="true">↗</span></a>
+            <a href="/stories/quiet-focus.html">Designing for quiet focus <span aria-hidden="true">↗</span></a>
+    </aside>
+</article>
+
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <a class="brand brand--footer" href="/">
+                <span class="brand-mark" aria-hidden="true">F</span>
+                <span>Fieldnotes</span>
+            </a>
+            <p>A journal for curious builders.</p>
+        </div>
+        <p>&copy; 2026 Fieldnotes · <a href="/privacy.html">Privacy</a></p>
+    </footer>
+    <script src="/js/site.js" defer></script>
+
+</body>
+</html>

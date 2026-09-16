@@ -13,5 +13,19 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 10.0.x
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
       - run: dotnet restore BlogApp.sln
       - run: dotnet build BlogApp.sln --configuration Release --no-restore
+      - name: Check reading and search routes
+        shell: bash
+        run: |
+          ASPNETCORE_ENVIRONMENT=Development dotnet run --project BlogApp/BlogApp.csproj --configuration Release --no-build --no-launch-profile --urls http://127.0.0.1:5249 > /tmp/fieldnotes.log 2>&1 &
+          app_pid=$!
+          trap 'kill "$app_pid" 2>/dev/null || true' EXIT
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:5249/ > /dev/null; then break; fi
+            sleep 1
+          done
+          node scripts/smoke-test.mjs

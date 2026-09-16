@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Fieldnotes is a clean ASP.NET Core MVC blog showcase built with Razor views." />
+    <meta name="description" content="@(ViewData["Description"] ?? "Thoughtful stories about software, design, and learning. Explore the Fieldnotes journal.")" />
     <meta name="theme-color" content="#17231d" />
     <title>@ViewData["Title"] — Fieldnotes</title>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -16,9 +16,9 @@
             <span>Fieldnotes</span>
         </a>
         <nav aria-label="Primary navigation">
-            <a asp-area="" asp-controller="Home" asp-action="Index">Stories</a>
-            <a asp-area="" asp-controller="Home" asp-action="About">About</a>
-            <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <a asp-area="" asp-controller="Home" asp-action="Index" aria-current="@(ViewContext.RouteData.Values["action"]?.ToString() == "Index" ? "page" : null)">Stories</a>
+            <a asp-area="" asp-controller="Home" asp-action="About" aria-current="@(ViewContext.RouteData.Values["action"]?.ToString() == "About" ? "page" : null)">About</a>
+            <a asp-area="" asp-controller="Home" asp-action="Privacy" aria-current="@(ViewContext.RouteData.Values["action"]?.ToString() == "Privacy" ? "page" : null)">Privacy</a>
         </nav>
     </header>
 
@@ -32,10 +32,11 @@
                 <span class="brand-mark" aria-hidden="true">F</span>
                 <span>Fieldnotes</span>
             </a>
-            <p>A small MVC publishing showcase.</p>
+            <p>A journal for curious builders.</p>
         </div>
         <p>&copy; @DateTime.UtcNow.Year Fieldnotes · <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></p>
     </footer>
+    <script src="~/js/site.js" asp-append-version="true" defer></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

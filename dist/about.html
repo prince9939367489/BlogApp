@@ -1,28 +1,66 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="About the Fieldnotes ASP.NET Core MVC portfolio project.">
-  <meta name="theme-color" content="#17231d">
-  <link rel="icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/css/site.css">
-  <title>About — Fieldnotes</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Thoughtful stories about software, design, and learning. Explore the Fieldnotes journal." />
+    <meta name="theme-color" content="#17231d" />
+    <title>About — Fieldnotes</title>
+    <link rel="stylesheet" href="/css/site.css" />
 </head>
 <body>
-  <a class="skip-link" href="#content">Skip to content</a>
-  <header class="site-header">
-    <a class="brand" href="/" aria-label="Fieldnotes home"><span class="brand-mark" aria-hidden="true">F</span><span>Fieldnotes</span></a>
-    <nav aria-label="Primary navigation"><a href="/">Stories</a><a href="/about.html" aria-current="page">About</a><a href="/privacy.html">Privacy</a></nav>
-  </header>
-  <main id="content">
-    <section class="page-intro"><p class="eyebrow">About the project</p><h1>A polished front end on a simple MVC foundation.</h1><p>Fieldnotes is a portfolio-ready ASP.NET Core project that demonstrates controller routing, Razor-rendered pages, shared layouts, static assets, and environment-aware error handling.</p></section>
-    <section class="about-grid" aria-label="Project details">
-      <article><span>01</span><h2>What works now</h2><p>A responsive stories page, an About page, a real privacy statement, reusable navigation and footer, accessible focus styles, and the standard production error route.</p></article>
-      <article><span>02</span><h2>How it is built</h2><p>.NET 10 and ASP.NET Core MVC handle requests and routing. Controllers select Razor views, while a shared layout and one custom stylesheet create a consistent interface.</p></article>
-      <article><span>03</span><h2>What comes next</h2><p>Real post models, Entity Framework Core persistence, create/edit workflows, authentication, categories, search, comments, and tests.</p></article>
-    </section>
-  </main>
-  <footer class="site-footer"><div><a class="brand brand--footer" href="/"><span class="brand-mark" aria-hidden="true">F</span><span>Fieldnotes</span></a><p>A small MVC publishing showcase.</p></div><p>&copy; 2026 Fieldnotes · <a href="/privacy.html">Privacy</a></p></footer>
+    <a class="skip-link" href="#content">Skip to content</a>
+    <header class="site-header">
+        <a class="brand" aria-label="Fieldnotes home" href="/">
+            <span class="brand-mark" aria-hidden="true">F</span>
+            <span>Fieldnotes</span>
+        </a>
+        <nav aria-label="Primary navigation">
+            <a href="/">Stories</a>
+            <a aria-current="page" href="/about.html">About</a>
+            <a href="/privacy.html">Privacy</a>
+        </nav>
+    </header>
+
+    <main id="content">
+
+<section class="page-intro">
+    <p class="eyebrow">About the project</p>
+    <h1>A polished front end on a simple MVC foundation.</h1>
+    <p>Fieldnotes is a portfolio-ready ASP.NET Core project that demonstrates controller routing, Razor-rendered pages, shared layouts, static assets, and environment-aware error handling.</p>
+</section>
+
+<section class="about-grid" aria-label="Project details">
+    <article>
+        <span>01</span>
+        <h2>What works now</h2>
+        <p>Four complete sample essays, dedicated reading pages, live search and topic filters, responsive layouts, keyboard navigation, and a no-results state. Search also works without JavaScript in the MVC app.</p>
+    </article>
+    <article>
+        <span>02</span>
+        <h2>How it is built</h2>
+        <p>.NET 10 and ASP.NET Core MVC handle requests and routing. Controllers select Razor views, while a shared layout and one custom stylesheet create a consistent interface.</p>
+    </article>
+    <article>
+        <span>03</span>
+        <h2>What comes next</h2>
+        <p>Database persistence, an authoring workflow, authentication, and comments remain future work. The current articles are sample content stored in a typed C# catalog.</p>
+    </article>
+</section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <a class="brand brand--footer" href="/">
+                <span class="brand-mark" aria-hidden="true">F</span>
+                <span>Fieldnotes</span>
+            </a>
+            <p>A journal for curious builders.</p>
+        </div>
+        <p>&copy; 2026 Fieldnotes · <a href="/privacy.html">Privacy</a></p>
+    </footer>
+    <script src="/js/site.js" defer></script>
+
 </body>
 </html>
